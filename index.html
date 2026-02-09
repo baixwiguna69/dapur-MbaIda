@@ -2,209 +2,163 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dapur Mba Ida</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 
-/* RESET */
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#f9f5f0;
+  background:#fdf8f2;
 }
 
 /* HEADER */
+
 header{
-  background:url('bg.jpg') center/cover no-repeat;
-  height:220px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+  background:url("images/bg.jpg") center/cover;
+  padding:70px 20px;
   text-align:center;
 }
 
-header h1{
-  margin:0;
-  font-size:32px;
-  color:#7a4a21;
-}
-
+header h1,
 header p{
-  margin:5px 0;
   color:#7a4a21;
+  margin:5px;
 }
 
-/* PAGE */
-.page{
-  display:none;
+/* CONTAINER */
+
+.container{
+  max-width:900px;
+  margin:auto;
   padding:20px;
 }
 
-.active{
-  display:block;
-}
+/* CATEGORY */
 
-/* BRAND */
-.judul-brand{
-  color:#7a4a21;
-  font-weight:bold;
-  text-align:center;
-  font-size:24px;
-  margin-bottom:15px;
-}
-
-/* KATEGORI */
-.kategori{
+.category{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   gap:15px;
 }
 
-.kategori button{
+.category button{
   padding:15px;
-  border:none;
-  background:#c98b4c;
+  background:#c58b50;
   color:white;
+  border:none;
   border-radius:8px;
   font-size:16px;
   cursor:pointer;
 }
 
-.kategori button:hover{
-  background:#a8703a;
+.category button:hover{
+  background:#a86d3a;
+}
+
+/* PAGE */
+
+.page{
+  display:none;
 }
 
 /* SLIDER */
+
 .slider{
-  width:100%;
+  position:relative;
   height:200px;
-  border-radius:10px;
   overflow:hidden;
+  border-radius:10px;
   margin-bottom:20px;
 }
 
-.slider img{
+.slide{
   width:100%;
   height:100%;
   object-fit:cover;
+  position:absolute;
+  opacity:0;
+  transition:1s;
 }
 
-/* PRODUK */
-.produk{
-  background:white;
-  border-radius:10px;
+.slide.active{
+  opacity:1;
+}
+
+/* PRODUCT */
+
+.product{
+  border:1px solid #ddd;
   padding:15px;
+  border-radius:10px;
   margin-bottom:15px;
-  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  background:white;
 }
 
-.produk img{
+.product img{
   width:100%;
-  height:160px;
+  height:150px;
   object-fit:cover;
   border-radius:8px;
 }
 
-.produk h3{
-  margin:10px 0 5px;
+.product h3{
+  margin:5px 0;
+  color:#7a4a21;
 }
 
-.harga{
-  color:#b25c00;
-  font-weight:bold;
-}
+/* INPUT */
 
-.qty{
+input{
   width:60px;
   padding:5px;
 }
 
-.produk button{
-  margin-top:10px;
-  width:100%;
-  background:#28a745;
-  color:white;
-  border:none;
-  padding:8px;
-  border-radius:5px;
-  cursor:pointer;
-}
-
 /* CART */
+
 .cart{
   background:white;
   padding:15px;
   border-radius:10px;
-  margin-bottom:20px;
-  box-shadow:0 2px 5px rgba(0,0,0,0.1);
-}
-
-.cart h3{
-  margin-top:0;
+  margin-top:20px;
 }
 
 .cart-item{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
+  margin:5px 0;
 }
 
-.remove-btn{
-  background:#b33;
+.cart-item button{
+  background:red;
   color:white;
   border:none;
-  padding:4px 8px;
+  padding:2px 6px;
   border-radius:4px;
-  cursor:pointer;
 }
 
-.remove-btn:hover{
-  background:#900;
-}
+/* BUTTON */
 
-/* TOPPING */
-.topping-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:8px;
-}
-
-.topping-item button{
-  background:#c98b4c;
-  border:none;
+.btn{
+  background:#25d366;
   color:white;
-  padding:4px 8px;
-  border-radius:4px;
-  cursor:pointer;
-}
-
-.topping-item button:hover{
-  background:#a8703a;
-}
-
-.checkout{
-  background:#25D366;
-  color:white;
+  padding:15px;
   border:none;
   width:100%;
-  padding:10px;
-  border-radius:5px;
+  border-radius:8px;
+  font-size:18px;
+  margin-top:10px;
   cursor:pointer;
-  font-size:16px;
 }
 
 .back{
-  background:#777;
-  color:white;
+  background:#888;
+  padding:8px 15px;
   border:none;
-  padding:8px 12px;
   border-radius:5px;
-  cursor:pointer;
-  margin-bottom:10px;
+  color:white;
+  margin-bottom:15px;
 }
 
 </style>
@@ -213,291 +167,270 @@ header p{
 <body>
 
 <!-- HEADER -->
+
 <header>
   <h1>Dapur Mba Ida</h1>
   <p>Catering Tradisional Jawa</p>
 </header>
 
-<!-- DASHBOARD -->
-<div id="home" class="page active">
+<div class="container">
 
-  <h2 class="judul-brand">Pilih Kategori Acara</h2>
+<!-- HOME -->
 
-  <div class="kategori">
-    <button onclick="openPaket('khitan')">Khitanan</button>
-    <button onclick="alert('Coming Soon')">Tahlilan</button>
-    <button onclick="alert('Coming Soon')">Pernikahan</button>
-    <button onclick="alert('Coming Soon')">Slametan</button>
-    <button onclick="alert('Coming Soon')">Arisan / Kantor</button>
-  </div>
+<div id="home">
 
-</div>
+<h2>Pilih Kategori</h2>
 
+<div class="category">
 
-<!-- HALAMAN PAKET -->
-<div id="paket" class="page">
-
-  <button class="back" onclick="backHome()">⬅ Kembali</button>
-
-  <h2 class="judul-brand">Dapur Mba Ida</h2>
-
-  <!-- SLIDER -->
-  <div class="slider">
-    <img id="slideImg" src="nasi-box-ai.jpg">
-  </div>
-
-  <!-- CART -->
-  <div class="cart">
-
-    <h3>🛒 Keranjang</h3>
-
-    <div id="cartItems"></div>
-
-    <b>Total: <span id="total">Rp 0</span></b><br><br>
-
-    <button class="checkout" onclick="checkoutWA()">
-      Checkout WhatsApp
-    </button>
-
-  </div>
-
-  <!-- TOPPING -->
-  <div class="cart">
-
-    <h3>🍩 Topping Tambahan (Opsional)</h3>
-
-    <div id="toppingList"></div>
-
-  </div>
-
-  <!-- PRODUK -->
-  <div id="produkList"></div>
+<button onclick="openPage('khitan')">Khitan</button>
+<button onclick="openPage('tahlil')">Tahlilan</button>
+<button onclick="openPage('nikah')">Pernikahan</button>
+<button onclick="openPage('slametan')">Slametan</button>
+<button onclick="openPage('kantor')">Arisan / Kantor</button>
 
 </div>
 
+</div>
+
+<!-- PAGE TEMPLATE -->
+
+<div id="khitan" class="page"></div>
+<div id="tahlil" class="page"></div>
+<div id="nikah" class="page"></div>
+<div id="slametan" class="page"></div>
+<div id="kantor" class="page"></div>
+
+</div>
 
 <script>
 
-/* NOMOR WA */
-let wa = '628xxxxxxxxx'; // GANTI NOMORMU
-
 /* DATA */
-const data = {
 
-  khitan:{
-    slides:[
-      'nasi-box-ai.jpg',
-      'nasi-box-ai.jpg',
-      'nasi-box-ai.jpg'
-    ],
+const paket = [
+ {nama:"Hemat",harga:15000,img:"images/hemat.jpg"},
+ {nama:"Standar",harga:20000,img:"images/standar.jpg"},
+ {nama:"Lengkap",harga:25000,img:"images/lengkap.jpg"}
+];
 
-    produk:[
-      {
-        nama:'Paket Hemat',
-        harga:25000,
-        img:'nasi-box-ai.jpg',
-        menu:'Nasi, Rendang, Lalapan, Sambal, Kerupuk, Tempe'
-      }
-    ],
+const topping = [
+ {nama:"Kotak Snack",harga:5000},
+ {nama:"Air Mineral",harga:3000},
+ {nama:"Buah Potong",harga:4000}
+];
 
-    topping:[
-      { nama:'Snack Box Mini', harga:5000 },
-      { nama:'Kue Basah', harga:7000 },
-      { nama:'Risol + Pastel', harga:8000 },
-      { nama:'Air Mineral Cup', harga:3000 }
-    ]
-  }
+let cart=[];
 
-};
+/* OPEN PAGE */
 
-let cart = [];
-let slideIndex = 0;
-let slideTimer;
+function openPage(id){
 
-/* NAV */
-function openPaket(kat){
+ document.getElementById("home").style.display="none";
 
-  document.getElementById('home').classList.remove('active');
-  document.getElementById('paket').classList.add('active');
+ document.querySelectorAll(".page").forEach(p=>{
+   p.style.display="none";
+ });
 
-  loadPaket(kat);
+ const page=document.getElementById(id);
 
+ page.innerHTML=generatePage(id);
+
+ page.style.display="block";
+
+ startSlider(id);
 }
 
-function backHome(){
+/* GENERATE PAGE */
 
-  document.getElementById('paket').classList.remove('active');
-  document.getElementById('home').classList.add('active');
+function generatePage(id){
 
-  clearInterval(slideTimer);
-}
+ let html=`
 
-/* LOAD PAKET */
-function loadPaket(kat){
+<button class="back" onclick="back()">← Kembali</button>
 
-  const d = data[kat];
+<div class="slider" id="slider-${id}">
+  <img src="images/slider1.jpg" class="slide active">
+  <img src="images/slider2.jpg" class="slide">
+  <img src="images/slider3.jpg" class="slide">
+</div>
 
-  /* SLIDER */
-  slideIndex = 0;
-  document.getElementById('slideImg').src = d.slides[0];
+<h2 style="color:#7a4a21">Paket ${id.toUpperCase()}</h2>
 
-  clearInterval(slideTimer);
+`;
 
-  slideTimer = setInterval(()=>{
-    slideIndex++;
-    if(slideIndex >= d.slides.length) slideIndex=0;
-    document.getElementById('slideImg').src = d.slides[slideIndex];
-  },3000);
+paket.forEach(p=>{
 
-  /* PRODUK */
-  let html='';
+html+=`
 
-  d.produk.forEach(p=>{
+<div class="product">
 
-    html+=`
-    <div class="produk">
+<img src="images/hemat.jpg">
 
-      <img src="images/hemat.jpg">
+<h3>${p.nama}</h3>
 
-      <h3>${p.nama}</h3>
+<p>Rp ${p.harga.toLocaleString()}</p>
 
-      <p>${p.menu}</p>
+Qty: <input type="number" min="0" value="0"
+onchange="add('${id}','${p.nama}',${p.harga},this.value)">
 
-      <div class="harga">Rp ${p.harga.toLocaleString()} / porsi</div>
+</div>
 
-      Jumlah:
-      <input type="number" min="1" value="1" class="qty" id="qty_${p.nama}">
+`;
 
-      <button onclick="addCart('${p.nama}',${p.harga})">
-        + Keranjang
-      </button>
+});
 
-    </div>
-    `;
-  });
+/* TOPPING */
 
-  document.getElementById('produkList').innerHTML = html;
+html+=`<h3>Toping Tambahan</h3>`;
 
-  /* TOPPING */
-  let topHtml='';
+topping.forEach(t=>{
 
-  d.topping.forEach(t=>{
+html+=`
 
-    topHtml+=`
-      <div class="topping-item">
+<div class="product">
 
-        <div>
-          ${t.nama}<br>
-          <small>Rp ${t.harga.toLocaleString()}</small>
-        </div>
+<h4>${t.nama}</h4>
+<p>Rp ${t.harga.toLocaleString()}</p>
 
-        <button onclick="addTopping('${t.nama}',${t.harga})">
-          + Tambah
-        </button>
+Qty: <input type="number" min="0" value="0"
+onchange="add('${id}','${t.nama}',${t.harga},this.value)">
 
-      </div>
-    `;
-  });
+</div>
 
-  document.getElementById('toppingList').innerHTML = topHtml;
+`;
 
-  cart=[];
-  renderCart();
-}
+});
 
 /* CART */
-function addCart(nama,harga){
 
-  let qty = document.getElementById('qty_'+nama).value;
+html+=`
 
-  qty = parseInt(qty);
+<div class="cart">
 
-  if(qty<=0) return alert('Jumlah minimal 1');
+<h3>🛒 Keranjang</h3>
 
+<div id="cart"></div>
+
+<h4>Total: Rp <span id="total">0</span></h4>
+
+<button class="btn" onclick="checkout()">Checkout WhatsApp</button>
+
+</div>
+
+`;
+
+return html;
+}
+
+/* BACK */
+
+function back(){
+ document.getElementById("home").style.display="block";
+ document.querySelectorAll(".page").forEach(p=>{
+  p.style.display="none";
+ });
+}
+
+/* ADD CART */
+
+function add(cat,name,price,qty){
+
+ qty=parseInt(qty);
+
+ cart=cart.filter(i=>i.name!==name);
+
+ if(qty>0){
   cart.push({
-    name:nama,
-    price:harga,
-    qty:qty
+   cat,name,price,qty
   });
+ }
 
-  renderCart();
+ updateCart();
 }
 
-function addTopping(nama,harga){
+/* UPDATE CART */
 
-  cart.push({
-    name:nama,
-    price:harga,
-    qty:1
-  });
+function updateCart(){
 
-  renderCart();
+ let html="";
+ let total=0;
+
+ cart.forEach((i,index)=>{
+
+  let sub=i.price*i.qty;
+  total+=sub;
+
+  html+=`
+
+<div class="cart-item">
+
+${i.name} (${i.qty})
+
+Rp ${sub.toLocaleString()}
+
+<button onclick="remove(${index})">X</button>
+
+</div>
+
+`;
+
+ });
+
+ document.getElementById("cart").innerHTML=html;
+ document.getElementById("total").innerText=total.toLocaleString();
 }
 
-function renderCart(){
+/* REMOVE */
 
-  let html='';
-  let total=0;
-
-  cart.forEach((item,i)=>{
-
-    let sub = item.price * item.qty;
-    total+=sub;
-
-    html+=`
-    <div class="cart-item">
-
-      <div>
-        <b>${item.name}</b><br>
-        ${item.qty} x Rp ${item.price.toLocaleString()}
-      </div>
-
-      <div>
-        Rp ${sub.toLocaleString()}
-        <button class="remove-btn" onclick="removeItem(${i})">❌</button>
-      </div>
-
-    </div>
-    `;
-  });
-
-  document.getElementById('cartItems').innerHTML = html;
-
-  document.getElementById('total').innerText =
-    'Rp '+total.toLocaleString();
-}
-
-function removeItem(i){
-  cart.splice(i,1);
-  renderCart();
+function remove(i){
+ cart.splice(i,1);
+ updateCart();
 }
 
 /* CHECKOUT */
-function checkoutWA(){
 
-  if(cart.length==0){
-    alert('Keranjang kosong');
-    return;
-  }
+function checkout(){
 
-  let text = 'Pesanan Dapur Mba Ida%0A%0A';
+ if(cart.length==0){
+  alert("Keranjang kosong");
+  return;
+ }
 
-  let total=0;
+ let text="Halo Dapur Mba Ida,%0ASaya pesan:%0A";
 
-  cart.forEach(i=>{
-    let sub=i.price*i.qty;
-    total+=sub;
+ let total=0;
 
-    text+=`- ${i.name} x${i.qty} = Rp ${sub}%0A`;
-  });
+ cart.forEach(i=>{
+  let sub=i.price*i.qty;
+  total+=sub;
 
-  text+=`%0ATotal: Rp ${total}%0A%0A`;
-  text+='Nama:%0ANo HP:';
+  text+=`- ${i.name} (${i.qty}) = Rp ${sub}%0A`;
+ });
 
-  window.open(
-    `https://wa.me/${wa}?text=${text}`,
-    '_blank'
-  );
+ text+=`%0ATotal: Rp ${total}%0A`;
+ text+=`Nama:%0ANo HP:%0A`;
+
+ window.open("https://wa.me/628XXXXXXXXX?text="+text);
+}
+
+/* SLIDER */
+
+function startSlider(id){
+
+ let slides=document.querySelectorAll(`#slider-${id} .slide`);
+
+ let i=0;
+
+ setInterval(()=>{
+
+  slides[i].classList.remove("active");
+
+  i=(i+1)%slides.length;
+
+  slides[i].classList.add("active");
+
+ },3000);
+
 }
 
 </script>
