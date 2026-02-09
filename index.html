@@ -18,7 +18,6 @@ body{
 header{
   background:url('bg.jpg') center/cover no-repeat;
   height:220px;
-  color:white;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -29,14 +28,12 @@ header{
 header h1{
   margin:0;
   font-size:32px;
-  color:#7a4a21; /* coklat jawa */
-  text-shadow:none;
+  color:#7a4a21;
 }
 
 header p{
   margin:5px 0;
   color:#7a4a21;
-  text-shadow:none;
 }
 
 /* PAGE */
@@ -135,7 +132,7 @@ header p{
   cursor:pointer;
 }
 
-/* KERANJANG */
+/* CART */
 .cart{
   background:white;
   padding:15px;
@@ -166,6 +163,27 @@ header p{
 
 .remove-btn:hover{
   background:#900;
+}
+
+/* TOPPING */
+.topping-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.topping-item button{
+  background:#c98b4c;
+  border:none;
+  color:white;
+  padding:4px 8px;
+  border-radius:4px;
+  cursor:pointer;
+}
+
+.topping-item button:hover{
+  background:#a8703a;
 }
 
 .checkout{
@@ -243,6 +261,15 @@ header p{
 
   </div>
 
+  <!-- TOPPING -->
+  <div class="cart">
+
+    <h3>🍩 Topping Tambahan (Opsional)</h3>
+
+    <div id="toppingList"></div>
+
+  </div>
+
   <!-- PRODUK -->
   <div id="produkList"></div>
 
@@ -271,6 +298,13 @@ const data = {
         img:'nasi-box-ai.jpg',
         menu:'Nasi, Rendang, Lalapan, Sambal, Kerupuk, Tempe'
       }
+    ],
+
+    topping:[
+      { nama:'Snack Box Mini', harga:5000 },
+      { nama:'Kue Basah', harga:7000 },
+      { nama:'Risol + Pastel', harga:8000 },
+      { nama:'Air Mineral Cup', harga:3000 }
     ]
   }
 
@@ -344,6 +378,29 @@ function loadPaket(kat){
 
   document.getElementById('produkList').innerHTML = html;
 
+  /* TOPPING */
+  let topHtml='';
+
+  d.topping.forEach(t=>{
+
+    topHtml+=`
+      <div class="topping-item">
+
+        <div>
+          ${t.nama}<br>
+          <small>Rp ${t.harga.toLocaleString()}</small>
+        </div>
+
+        <button onclick="addTopping('${t.nama}',${t.harga})">
+          + Tambah
+        </button>
+
+      </div>
+    `;
+  });
+
+  document.getElementById('toppingList').innerHTML = topHtml;
+
   cart=[];
   renderCart();
 }
@@ -361,6 +418,17 @@ function addCart(nama,harga){
     name:nama,
     price:harga,
     qty:qty
+  });
+
+  renderCart();
+}
+
+function addTopping(nama,harga){
+
+  cart.push({
+    name:nama,
+    price:harga,
+    qty:1
   });
 
   renderCart();
